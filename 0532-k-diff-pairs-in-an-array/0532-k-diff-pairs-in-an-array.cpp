@@ -1,17 +1,25 @@
-#include<algorithm>
 class Solution {
 public:
     int findPairs(vector<int>& nums, int k) {
-        int n = nums.size();
-        sort(nums.begin(),nums.end());
-        set<int> set;
-       // 1 1 3 4 5 
-        for(int i=0;i<nums.size();i++){
-            int cur = nums[i] +k; 
-            if(binary_search(nums.begin()+i+1,nums.end(),cur)){
-                set.insert(cur);
+        unordered_map<int,int> map;
+        int count=0;
+        for(auto x : nums){
+            map[x]++;
+        }
+        if(k>0){
+            for(auto x : map){
+                if(map.find(x.first+k) != map.end()){
+                    count++;
+                }
             }
         }
-        return set.size();
+        else{
+            for(auto x : map){
+                if(x.second > 1){
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 };
