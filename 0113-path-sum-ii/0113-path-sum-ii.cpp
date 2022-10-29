@@ -1,21 +1,23 @@
 
 class Solution {
 public:
-    void getPathSum(TreeNode* root, int targetSum , vector<int> temp, vector<vector<int>> &ans){
-        if(root == NULL)
+    vector<vector<int>> ans;
+    void solve(TreeNode* root, int k,vector<int> &path, int cursum){
+        if(!root)
             return;
-        if(root->left == NULL && root->right == NULL && targetSum == root->val){
-            temp.push_back(root->val);
-            ans.push_back(temp);
-            return;
+        cursum += root->val;
+        path.push_back(root->val);
+        if(!root->left && !root->right && cursum == k){
+            ans.push_back(path);
         }
-        temp.push_back(root->val);
-        getPathSum(root->left,targetSum - root->val,temp,ans);
-        getPathSum(root->right,targetSum - root->val,temp,ans);
+        solve(root->left,k,path,cursum);
+        solve(root->right,k,path,cursum);
+        path.pop_back();
     }
-    vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
-        vector<vector<int>> ans;
-        getPathSum(root,targetSum,{},ans);
+    vector<vector<int>> pathSum(TreeNode* root, int k) {
+        vector<int> path; 
+        solve(root,k,path,0);
         return ans;
+        
     }
 };
