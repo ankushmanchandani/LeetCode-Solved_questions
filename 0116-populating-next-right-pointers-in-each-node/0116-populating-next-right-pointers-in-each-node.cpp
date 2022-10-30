@@ -2,15 +2,19 @@
 class Solution {
 public:
     Node* connect(Node* root) {
-        if(!root)
-            return NULL;
-        auto L = root->left,R=root->right  , N = root->next;
-        if(L){
-            L->next = R;
-            if(N) R->next = N->left;
-            connect(L);
-            connect(R);
+        auto head = root;
+        for(;root;root=root->left){
+            for(auto cur=root;cur;cur=cur->next){
+                if(cur->left){
+                    cur->left->next=cur->right;
+                
+                    if(cur->next){
+                        cur->right->next = cur->next->left;
+                    }
+                }
+                else break;
+            }
         }
-        return root;
+        return head;
     }
 };
