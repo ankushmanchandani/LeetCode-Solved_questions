@@ -4,24 +4,13 @@ public:
     Node* connect(Node* root) {
         if(!root)
             return NULL;
-        queue<Node*> q;
-        q.push(root);
-        while(size(q)){
-            Node* rightnode = NULL;
-            for(int i=q.size();i;i--){
-                auto cur = q.front(); q.pop();
-                cur->next = rightnode;
-                rightnode = cur;
-                if(cur->right){
-                    q.push(cur->right);
-                    q.push(cur->left);
-                }
-            }
+        auto L = root->left,R=root->right  , N = root->next;
+        if(L){
+            L->next = R;
+            if(N) R->next = N->left;
+            connect(L);
+            connect(R);
         }
         return root;
     }
 };
-
-
-
-
