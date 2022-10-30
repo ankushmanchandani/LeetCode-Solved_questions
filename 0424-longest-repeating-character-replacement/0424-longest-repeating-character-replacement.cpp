@@ -3,12 +3,12 @@ public:
     int characterReplacement(string s, int k) {
         int n = s.size();
         int i=0, j=0 , maxi =0;
-        unordered_map<char,int> map;
+        vector<int> count(26);
         int ans=-1;
         while(j<n){
-            maxi = max(maxi,++map[s[j]]);
+            maxi = max(maxi,++count[s[j] - 'A']);
             if((j-i+1) - maxi > k){
-                map[s[i]]--;
+                count[s[i] - 'A']--;
                 i++;
             }
             ans = max(ans,j-i+1);
