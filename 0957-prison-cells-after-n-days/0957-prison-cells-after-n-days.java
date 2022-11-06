@@ -1,9 +1,10 @@
 class Solution {
     public int[] prisonAfterNDays(int[] cells, int n) {
-        if(cells==null || cells.length==0 || n<=0 ) return cells;
-        boolean hascycle = false;
+        if(cells == null || cells.length == 0 || n<=0) return cells;
+        boolean hascycle=false;
         int cycle = 0;
         HashSet<String> set = new HashSet<>();
+        
         for(int i=0;i<n;i++){
             int[] next = nextDay(cells);
             String key = Arrays.toString(next);
@@ -25,13 +26,15 @@ class Solution {
         }
         return cells;
     }
-    private int[] nextDay(int[] cells){
-        int[] tmp = new int[cells.length];
+    private int[] nextDay(int[] cells) {
+        int[] temp = new int[cells.length];
         for(int i=1;i<cells.length-1;i++){
             if(cells[i-1] == cells[i+1]){
-                tmp[i] =1;
+                temp[i] = 1;
             }
         }
-        return tmp;
+        return temp;
     }
 }
+
+
