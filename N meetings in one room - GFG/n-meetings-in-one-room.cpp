@@ -7,9 +7,9 @@ using namespace std;
 class comparator{
     public:
     bool  operator()(pair<int,int> p1 ,pair<int ,int> p2){
-        if(p1.second == p2.second){
-            p1.first < p2.first;
-        }
+        // if(p1.second == p2.second){
+        //     p1.first < p2.first;
+        // }
         return p1.second < p2.second;
     }
 };
