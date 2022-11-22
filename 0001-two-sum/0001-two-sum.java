@@ -1,15 +1,16 @@
 class Solution {
-public:
-    vector<int> twoSum(vector<int>& nums, int target) {
-        unordered_map<int,int> map;
-        for(int i=0; i<nums.size(); i++){
-            if(map.find(target - nums[i]) != map.end()){
-                return {i,map[target - nums[i]]};
+    public int[] twoSum(int[] nums, int target) {
+        HashMap<Integer,Integer> map = new HashMap<Integer,Integer>();
+        int res[] = new int[2];
+        for(int i=0; i<nums.length; i++){
+            
+            if(map.containsKey(target - nums[i])){
+                res[0] = map.get(target - nums[i]);
+                res[1] = i;
+                return res;
             }
-            else{
-                map[nums[i]]=i;
-            }
+            map.put(nums[i],i);
         }
-        return {-1,-1};
+        return res;
     }
-};
+}
