@@ -1,1 +1,2 @@
-​
+TC - O(N*LOGN) SORTING
+SC -O(N) EXTRA SPACE
