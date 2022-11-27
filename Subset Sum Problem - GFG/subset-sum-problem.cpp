@@ -15,22 +15,25 @@ public:
         
         int n = arr.size();
         vector<vector<bool>> dp(n,vector<bool>(sum+1,false));
-        for(int ind =0; ind<n ;ind++){
-            dp[ind][0] = true;
-        }
-        dp[0][arr[0]] = true;
+        vector<bool> prev(sum+1);
+        vector<bool> curr(sum+1);
+
+        prev[0] = true;
+        prev[arr[0]] = true;
+        
         for(int ind = 1; ind<n ; ind++){
             for(int k=1; k<=sum; k++){
-                bool not_take =dp[ind-1][k];
+                bool not_take =prev[k];
                 bool take = false;
                 if(k>=arr[ind]){
-                    take = dp[ind-1][k-arr[ind]];
+                    take = prev[k-arr[ind]];
                 }
-                 dp[ind][k] =  take | not_take;
+                 curr[k] =  take | not_take;
             }
-        }
+            prev = curr; 
+            }
         
-        return dp[n-1][sum];
+        return prev[sum];
     }
 };
 
