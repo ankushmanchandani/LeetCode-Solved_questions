@@ -1,20 +1,23 @@
 class Solution {
 public:
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
-        int i=0, j=0;
-        vector<int> ans(nums1.size(),-1);
+        
+        stack<int> st;
+        unordered_map<int,int> map;
+        //decreasing monotonic stack
+        for(int i=nums2.size()-1;i>=0;i--){
+            int ele = nums2[i];
+            while(!st.empty() and st.top() <= ele ){
+                st.pop();
+            }
+            int res = (st.empty()) ? -1 : st.top();
+            map.insert({ele,res});
+            st.push(ele);
+        }
+        vector<int> ans(nums1.size());
         for(int i=0;i<nums1.size();i++){
-            for(int j=0;j<nums2.size();j++){
-                if(nums1[i] == nums2[j]){
-                    //next greater element dundna hai nums2[j] k liye
-                    for(int k=j+1 ; k<nums2.size() ; k++){
-                        if(nums2[k]>nums2[j]){
-                            ans[i] = nums2[k];
-                            break;
-                        }
-                    }
-                    
-                }
+            if(map.find(nums1[i]) != map.end()){
+                ans[i] = map[nums1[i]];
             }
         }
         return ans;
