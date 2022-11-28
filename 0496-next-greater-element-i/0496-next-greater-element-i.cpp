@@ -14,11 +14,9 @@ public:
             map.insert({ele,res});
             st.push(ele);
         }
-        vector<int> ans(nums1.size());
-        for(int i=0;i<nums1.size();i++){
-            if(map.find(nums1[i]) != map.end()){
-                ans[i] = map[nums1[i]];
-            }
+        vector<int> ans;
+        for(auto x : nums1){
+            ans.push_back(map[x]);
         }
         return ans;
     }
