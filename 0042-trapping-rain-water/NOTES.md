@@ -1,0 +1,1 @@
+**min(leftmax,rightmax) - a[i]**
