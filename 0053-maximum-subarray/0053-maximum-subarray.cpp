@@ -5,9 +5,11 @@ public:
         int maxsum = nums[0];
         for(int i=0; i<nums.size(); i++){
             cursum += nums[i];
-            if(cursum>maxsum) maxsum = cursum;
-            if(cursum<0){
-                cursum = 0;
+            if(nums[i] > cursum){
+                cursum = nums[i];
+            }
+            if(maxsum < cursum){
+                maxsum = cursum;
             }
         }
         return maxsum;
