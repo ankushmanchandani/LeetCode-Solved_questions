@@ -1,25 +1,23 @@
 class Solution {
 public:
-    void solve(int index,vector<int>& nums,vector<int> output,vector<vector<int>> &ans){
-        //base case
-        if(index>=nums.size()){
-            ans.push_back(output);
+    void solve(int index , vector<int>& nums,  vector<vector<int>> &res  ,vector<int>& path){
+        if(index == nums.size()){
+            res.push_back(path);
             return;
         }
         
-        //exclude
-        solve(index+1,nums,output,ans);
+        path.push_back(nums[index]);
+        solve(index + 1 , nums, res, path);
+        path.pop_back();
         
-        //include
-        int element = nums[index];
-        output.push_back(element);
-        solve(index+1,nums,output,ans);
+        solve(index + 1 , nums, res, path);
     }
+    
+    
     vector<vector<int>> subsets(vector<int>& nums) {
-        vector<vector<int>> ans;
-        vector<int> output;
-        int index=0;
-        solve(index,nums,output,ans);
-        return ans;
+        vector<vector<int>> res;
+        vector<int> path;
+        solve(0, nums, res, path);
+        return res;
     }
 };
