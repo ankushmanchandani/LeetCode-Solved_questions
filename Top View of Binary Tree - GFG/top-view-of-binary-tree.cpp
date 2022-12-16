@@ -90,38 +90,33 @@ Node* buildTree(string str)
 
 // } Driver Code Ends
 
+
 class Solution
 {
     public:
-    //Function to return a list of nodes visible from the top view 
-    //from left to right in Binary Tree.
+    
     vector<int> topView(Node *root)
     {
         vector<int> ans;
-        if(root == NULL) return ans;
-        map<int,int> map;
-               //line->node->data 
+        if(!root) return ans;
         queue<pair<Node*,int>> q;
-                //node->line
+        //node ,line
+        map<int,int> mpp;
+        //line , node
         q.push({root,0});
         while(!q.empty()){
-            Node* node = q.front().first;
-            int line = q.front().second;
+            auto it = q.front();
             q.pop();
-            if(map.find(line) == map.end()){
-                map[line] = node->data;
-            }
-                
-            if(node->left){
-                q.push({node->left,line-1});
-            }
-            if(node->right){
-                q.push({node->right,line+1});
-            }
+            Node* node = it.first;
+            int level = it.second;
+            
+            if(mpp.find(level) == mpp.end()) mpp[level] = node->data;
+            
+            if(node->left) q.push({node->left , level-1});
+            if(node->right) q.push({node->right , level+1});
+            
         }
-        
-        //traverse in map
-        for(auto it : map){
+        for(auto it : mpp){
             ans.push_back(it.second);
         }
         return ans;
