@@ -110,7 +110,7 @@ class Solution
             Node* node = it.first;
             int level = it.second;
             
-            if(mpp.find(level) == mpp.end()) mpp[level] = node->data;
+           if(mpp.find(level) == mpp.end()) mpp[level] = node->data;
             
             if(node->left) q.push({node->left , level-1});
             if(node->right) q.push({node->right , level+1});
